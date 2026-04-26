@@ -1,6 +1,10 @@
 # 🍰 Food Recipe App
 
-A full-stack web application for sharing, discovering, and managing food recipes. Built with Node.js/Express backend and React frontend, with MongoDB Atlas for data storage.
+> A full-stack web application for sharing, discovering, and managing food recipes.
+>
+> **Created by**: [Ssadiia-Omer](https://github.com/Ssadiia-Omer)
+
+Built with Node.js/Express backend and React frontend, with MongoDB Atlas for data storage.
 
 ## 📋 Table of Contents
 
@@ -368,6 +372,84 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Made with ❤️ by Sadia Malik**
+**Made with ❤️ by [Ssadiia-Omer](https://github.com/Ssadiia-Omer)**
 
 For questions or support, please open an issue on GitHub.
+
+
+
+
+/*
+
+Here’s a much shorter version:
+
+---
+
+# 🍰 Food Recipe App
+
+Full-stack recipe app to create, share, and explore recipes.
+Built with **Node.js/Express**, **React**, and **MongoDB Atlas**.
+
+## ✨ Features
+
+* User auth (JWT)
+* CRUD recipes
+* Search & categories
+* Favorites & user profiles
+* Image upload
+* Responsive UI
+
+## 🛠 Tech Stack
+
+* **Backend**: Node.js, Express, MongoDB, Mongoose
+* **Frontend**: React, Vite, Axios
+* **Auth**: JWT, bcrypt
+
+## 🚀 Setup
+
+```bash
+git clone <repo>
+cd backend && npm install
+cd ../frontend/food-blog-app && npm install
+```
+
+Create `.env` in backend:
+
+```env
+PORT=3000
+CONNECTION_STRING=<your_mongo_uri>
+SECRET_KEY=<your_secret>
+```
+
+## ▶️ Run
+
+Backend:
+
+```bash
+npm run dev
+```
+
+Frontend:
+
+```bash
+npm run dev
+```
+
+## 📡 API
+
+* Auth: `/login`, `/signUp`
+* Recipes: `/recipe`
+* Categories: `/category`
+
+## 💾 Schemas
+
+* **User**: email, password
+* **Recipe**: title, ingredients, instructions, category
+* **Category**: name, description
+
+## 📝 License
+
+MIT
+
+---
+*/
