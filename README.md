@@ -32,7 +32,6 @@ Built with Node.js/Express backend and React frontend, with MongoDB Atlas for da
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
 ### Admin/Developer Features
-- **Image Upload**: Upload recipe images with multer file storage
 - **Database Aggregation**: View recipe statistics by category
 - **Secure API**: JWT-protected routes for authenticated operations
 - **MongoDB Atlas Integration**: Cloud-based database with replica sets
