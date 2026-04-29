@@ -22,5 +22,6 @@ router.post("/",upload.single('file'),verifyToken ,addRecipe) //add recipe
 router.put("/:id",upload.single('file'),editRecipe) //Edit recipe
 router.delete("/:id",deleteRecipe) //Delete recipe
 
+
 module.exports=router
 

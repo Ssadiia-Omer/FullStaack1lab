@@ -1,68 +1,69 @@
+import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+import axios from "axios"
 
-import { useEffect, useState } from "react";
-import axios from "axios";
+const API_BASE = "http://localhost:3000"
 
 const AddFoodRecipe = () => {
-  const [title, setTitle] = useState("");
-  const [ingredients, setIngredients] = useState("");
-  const [instructions, setInstructions] = useState("");
-  const [time, setTime] = useState("");
-  const [category, setCategory] = useState("");
-  const [file, setFile] = useState(null);
-  const [categories, setCategories] = useState([]);
+  const [title, setTitle] = useState("")
+  const [ingredients, setIngredients] = useState("")
+  const [instructions, setInstructions] = useState("")
+  const [time, setTime] = useState("")
+  const [category, setCategory] = useState("")
+  const [file, setFile] = useState(null)
+  const [categories, setCategories] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/category");
-        setCategories(res.data);
+        const res = await axios.get(`${API_BASE}/category`)
+        setCategories(Array.isArray(res.data) ? res.data : [])
       } catch (err) {
-        console.log(err);
+        console.error(err)
       }
-    };
-
-    fetchCategories();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!file) {
-      alert("Please select a recipe image");
-      return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("ingredients", ingredients);
-    formData.append("instructions", instructions);
-    formData.append("time", time);
-    formData.append("category", category);
-    formData.append("file", file);
+    fetchCategories()
+  }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const token = localStorage.getItem("token")
+    if (!token) {
+      alert("Please login to add a recipe")
+      return
+    }
+
+    if (!file) {
+      alert("Please select a recipe image")
+      return
+    }
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("ingredients", ingredients)
+    formData.append("instructions", instructions)
+    formData.append("time", time)
+    formData.append("category", category)
+    formData.append("file", file)
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.post("http://localhost:3000/recipe", formData, {
+      await axios.post(`${API_BASE}/recipe`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",
         },
-      });
+      })
 
-      alert("Recipe added successfully!");
-
-      setTitle("");
-      setIngredients("");
-      setInstructions("");
-      setTime("");
-      setCategory("");
-      setFile(null);
+      alert("Recipe added successfully!")
+      navigate("/myRecipe")
     } catch (err) {
-      console.log(err);
-      const errorMsg = err.response?.data?.message || "Error adding recipe";
-      alert(errorMsg);
+      console.error(err)
+      alert(err.response?.data?.message || "Error adding recipe")
     }
-  };
+  }
 
   return (
     <section className="add-recipe-page">
@@ -137,15 +138,20 @@ const AddFoodRecipe = () => {
             <label>Recipe Image</label>
             <input
               type="file"
+              accept="image/*"
               onChange={(e) => setFile(e.target.files[0])}
+              required
             />
           </div>
 
-          <button type="submit" className="submit-button">Add Recipe</button>
+          <div className="form-actions">
+            <button type="submit" className="submit-button">Add Recipe</button>
+            <button type="button" className="secondary-button" onClick={() => navigate("/myRecipe")}>Cancel</button>
+          </div>
         </form>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export default AddFoodRecipe;
+export default AddFoodRecipe
