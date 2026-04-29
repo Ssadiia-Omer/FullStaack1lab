@@ -1,5 +1,3 @@
-// frontend/food-blog-app/src/App.jsx
-
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
@@ -19,9 +17,8 @@ function App() {
         <Route path="/addRecipe" element={<AddFoodRecipe />} />
         <Route path="/editRecipe/:id" element={<EditRecipe />} />
         <Route path="/recipe/:id" element={<RecipeDetails />} />
-
-        <Route path="/myRecipe" element={<div className="recipe"><RecipeItems /></div>} />
-        <Route path="/favRecipe" element={<div className="recipe"><RecipeItems /></div>} />
+        <Route path="/myRecipe" element={<div className="recipe"><RecipeItems mode="mine" /></div>} />
+        <Route path="/favRecipe" element={<div className="recipe"><RecipeItems mode="favourites" /></div>} />
       </Routes>
       <Footer />
     </Router>
